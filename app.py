@@ -24,7 +24,7 @@ class Teksty(db.Model):
     text = db.Column(db.String(1000))
     ilosc=db.Column(db.Integer)
     edytowanie = db.Column(db.Integer)
-    usuwanie = db.Column(db.Boolean)
+    usuwanie = db.Column(db.Integer)
    
 
     def __repr__(self):

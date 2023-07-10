@@ -37,6 +37,10 @@ nosetests.xml
 
 # SQLite databases
 *.sqlite
+data
 
 # Virtual environment
 WS
+
+#Configuration file:
+config.cfg
