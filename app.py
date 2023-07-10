@@ -1,16 +1,36 @@
 from flask import Flask, render_template, request
 from flask_bootstrap import Bootstrap
+from datetime import datetime
+from flask_moment import Moment
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
+app.config.from_pyfile('config.cfg')
 bootstrap = Bootstrap(app)
+moment = Moment(app)
+db = SQLAlchemy(app)
+
+class Teksty(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    data=db.Column(db.Date())
+    text = db.Column(db.String(1000))
+    ilosc=db.Column(db.Integer)
+    edytowanie = db.Column(db.Integer)
+    usuwanie = db.Column(db.Boolean)
+   
+
+    def __repr__(self):
+        return 'Teksty: {}/{}'.format(self.id, self.name)
 
 @app.route('/', methods=['GET','POST'])
 def index():
-    return render_template('index.html', the_title='Dodaj tekst!', active_menu='home')
+    return render_template('index.html', the_title='Dodaj tekst!', active_menu='home', the_current_time=datetime.utcnow())
 
 @app.route('/teksty')
 def teksty():
-    return render_template('teksty.html', the_title='Przeglądaj i edytuj bazę tekstów!', the_tactive_menu='teksty')
+    db.create_all()
+    teksty = Teksty.query.all()
+    return render_template('teksty.html', the_title='Przeglądaj i edytuj bazę tekstów!', active_menu='teksty', the_teksty=teksty)
 
 @app.route('/grain')
 def grain():

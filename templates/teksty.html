@@ -6,4 +6,27 @@
 <div class="page-header">
     <h1>Baza tekstów</h1>
 </div>
+<div>
+    <table style="text-align: left; ">
+        <tr style="background-color:MediumSlateBlue;">
+          <th style="width:5%;">Numer</th>
+          <th style="width:10%;">Data</th>
+          <th style="width:70%;">Teksty</th>
+          <th style="width:5%;">Ilość słów</th>
+          <th style="width:5%;">Edytuj</th>
+          <th style="width:5%;">Usuń</th>
+        </tr>
+        {% for i in the_teksty  %}
+        <tr>
+          <td style="width:5%; background-color:rgb(157, 144, 231);">{{i.id}}</td>
+          <td style="width:10%;">{{i.data}}</td>
+          <td style="width:70%;">{{i.text}}</td>
+          <td style="width:5%;">{{i.ilosc}}</td> 
+          <td style="width:5%;">{{i.edytowanie}}</td> 
+          <td style="width:5%;">{{i.usuwanie}}</td> 
+        </tr>   
+        {% endfor %}
+              
+    </table>
+</div>
 {% endblock %}
